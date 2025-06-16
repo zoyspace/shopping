@@ -20,7 +20,6 @@ import type { Product, Category } from "@/types";
 interface ProductListProps {
 	products: Product[];
 	categories: Category[];
-	onAddToCart?: (productId: string) => void;
 	onToggleFavorite?: (productId: string) => void;
 	favoriteIds?: string[];
 }
@@ -36,7 +35,6 @@ type ViewMode = "grid" | "list";
 export function ProductList({
 	products,
 	categories,
-	onAddToCart,
 	onToggleFavorite,
 	favoriteIds = [],
 }: ProductListProps) {
@@ -138,11 +136,6 @@ export function ProductList({
 		setIsFiltering(false);
 		updateUrl();
 	}, [searchQuery, selectedCategory, sortBy, priceRange, products]);
-
-	const handleAddToCart = (productId: string) => {
-		onAddToCart?.(productId);
-		toast.success("商品をカートに追加しました");
-	};
 
 	const clearFilters = () => {
 		setSearchQuery("");
@@ -345,7 +338,6 @@ export function ProductList({
 							<ProductCard
 								key={product.id}
 								product={product}
-								onAddToCart={handleAddToCart}
 								onToggleFavorite={onToggleFavorite}
 								isFavorite={favoriteIds.includes(product.id)}
 								className={viewMode === "list" ? "flex flex-row" : ""}

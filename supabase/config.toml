@@ -313,3 +313,9 @@ s3_region = "env(S3_REGION)"
 s3_access_key = "env(S3_ACCESS_KEY)"
 # Configures AWS_SECRET_ACCESS_KEY for S3 bucket
 s3_secret_key = "env(S3_SECRET_KEY)"
+
+[functions]
+# Configures Edge Functions behavior
+verify_jwt = false
+# Port for serving Edge Functions locally
+port = 54325

@@ -22,7 +22,7 @@ export default function Home() {
 								<ShoppingBag className="mr-2 h-5 w-5" />
 								商品を見る
 							</Link>
-						</Button>
+						</Button> 
 						<Button
 							asChild
 							variant="outline"

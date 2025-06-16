@@ -83,10 +83,6 @@ function ProductListContent() {
 			<ProductList
 				products={products}
 				categories={categories}
-				onAddToCart={(productId) => {
-					// TODO: カート機能実装時に追加
-					console.log("Add to cart:", productId);
-				}}
 				onToggleFavorite={(productId) => {
 					// TODO: お気に入り機能実装時に追加
 					console.log("Toggle favorite:", productId);

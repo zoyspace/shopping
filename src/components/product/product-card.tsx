@@ -1,17 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Heart } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
+import { useCart } from "@/hooks/use-cart";
 import type { Product } from "@/types";
 
 interface ProductCardProps {
 	product: Product;
-	onAddToCart?: (productId: string) => void;
 	onToggleFavorite?: (productId: string) => void;
 	isFavorite?: boolean;
 	className?: string;
@@ -19,21 +20,49 @@ interface ProductCardProps {
 
 export function ProductCard({
 	product,
-	onAddToCart,
 	onToggleFavorite,
 	isFavorite = false,
 	className = "",
 }: ProductCardProps) {
+	const { addToCart } = useCart(); // isLoadingを取得しない
 	const [isImageLoading, setIsImageLoading] = useState(true);
 	const [imageError, setImageError] = useState(false);
+	const [isAddingToCart, setIsAddingToCart] = useState(false);
 
-	const handleAddToCart = (e: React.MouseEvent) => {
+	// フォールバック: 5秒後にローディング状態をリセット
+	useEffect(() => {
+		if (isAddingToCart) {
+			const timeout = setTimeout(() => {
+				setIsAddingToCart(false);
+			}, 5000);
+
+			return () => clearTimeout(timeout);
+		}
+	}, [isAddingToCart]);
+
+	const handleAddToCart = async (e: React.MouseEvent) => {
 		e.preventDefault();
-		onAddToCart?.(product.id);
+		e.stopPropagation();
+
+		// 重複実行を防止
+		if (isAddingToCart) return;
+
+		setIsAddingToCart(true);
+
+		try {
+			await addToCart(product, 1);
+		} catch (error) {
+			// エラーは useCart 内で処理される
+			console.error("カート追加エラー:", error);
+		} finally {
+			// 必ずローディング状態をリセット
+			setIsAddingToCart(false);
+		}
 	};
 
 	const handleToggleFavorite = (e: React.MouseEvent) => {
 		e.preventDefault();
+		e.stopPropagation();
 		onToggleFavorite?.(product.id);
 	};
 
@@ -82,7 +111,7 @@ export function ProductCard({
 						)}
 
 						{/* 在庫切れ表示 */}
-						{product.stock_quantity === 0 && (
+						{product.inventory === 0 && (
 							<div className="absolute inset-0 bg-black/50 flex items-center justify-center">
 								<span className="text-white font-semibold">在庫切れ</span>
 							</div>
@@ -96,7 +125,7 @@ export function ProductCard({
 						<p className="text-gray-600 text-sm mb-2 line-clamp-2">
 							{product.description}
 						</p>
-						<div className="flex items-center justify-between">
+						<div className="flex items-center justify-between mb-2">
 							<span className="text-xl font-bold text-gray-900">
 								{formatPrice(product.price)}
 							</span>
@@ -107,6 +136,19 @@ export function ProductCard({
 									</span>
 								)}
 						</div>
+						<div className="flex items-center justify-between">
+							<Badge
+								variant={product.inventory <= 5 ? "destructive" : "secondary"}
+								className="text-xs"
+							>
+								在庫: {product.inventory}個
+							</Badge>
+							{product.inventory <= 5 && product.inventory > 0 && (
+								<Badge variant="outline" className="text-xs">
+									残りわずか
+								</Badge>
+							)}
+						</div>
 					</div>
 				</CardContent>
 			</Link>
@@ -114,12 +156,16 @@ export function ProductCard({
 			<CardFooter className="p-4 pt-0">
 				<Button
 					onClick={handleAddToCart}
-					disabled={product.stock_quantity === 0}
+					disabled={product.inventory === 0 || isAddingToCart}
 					className="w-full"
-					variant={product.stock_quantity === 0 ? "secondary" : "default"}
+					variant={product.inventory === 0 ? "secondary" : "default"}
 				>
 					<ShoppingCart className="h-4 w-4 mr-2" />
-					{product.stock_quantity === 0 ? "在庫切れ" : "カートに追加"}
+					{product.inventory === 0
+						? "在庫切れ"
+						: isAddingToCart
+							? "追加中..."
+							: "カートに追加"}
 				</Button>
 			</CardFooter>
 		</Card>

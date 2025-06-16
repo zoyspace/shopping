@@ -17,34 +17,33 @@ import {
 } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
+import { useCart } from "@/hooks/use-cart";
 import type { Product } from "@/types";
 
 interface ProductDetailProps {
 	product: Product;
-	onAddToCart?: (productId: string, quantity: number) => void;
 	onToggleFavorite?: (productId: string) => void;
 	isFavorite?: boolean;
 }
 
 export function ProductDetail({
 	product,
-	onAddToCart,
 	onToggleFavorite,
 	isFavorite = false,
 }: ProductDetailProps) {
 	const router = useRouter();
+	const { addToCart, isLoading } = useCart();
 	const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 	const [quantity, setQuantity] = useState(1);
 	const [isImageLoading, setIsImageLoading] = useState(true);
 	const [imageError, setImageError] = useState(false);
 
-	const handleAddToCart = () => {
-		if (quantity > product.stock_quantity) {
+	const handleAddToCart = async () => {
+		if (quantity > product.inventory) {
 			toast.error("在庫数を超えています");
 			return;
 		}
-		onAddToCart?.(product.id, quantity);
-		toast.success(`${product.name} を ${quantity}個 カートに追加しました`);
+		await addToCart(product, quantity);
 	};
 
 	const handleToggleFavorite = () => {
@@ -81,7 +80,7 @@ export function ProductDetail({
 	const adjustQuantity = (delta: number) => {
 		const newQuantity = Math.max(
 			1,
-			Math.min(product.stock_quantity, quantity + delta),
+			Math.min(product.inventory, quantity + delta),
 		);
 		setQuantity(newQuantity);
 	};
@@ -137,7 +136,7 @@ export function ProductDetail({
 						)}
 
 						{/* 在庫切れオーバーレイ */}
-						{product.stock_quantity === 0 && (
+						{product.inventory === 0 && (
 							<div className="absolute inset-0 bg-black/50 flex items-center justify-center">
 								<span className="text-white font-semibold text-xl">
 									在庫切れ
@@ -200,12 +199,12 @@ export function ProductDetail({
 						{/* 在庫状況 */}
 						<div className="flex items-center gap-2 mb-4">
 							<span className="text-sm text-gray-600">在庫:</span>
-							{product.stock_quantity > 0 ? (
+							{product.inventory > 0 ? (
 								<Badge
 									variant="outline"
 									className="text-green-600 border-green-600"
 								>
-									{product.stock_quantity}個 在庫あり
+									{product.inventory}個 在庫あり
 								</Badge>
 							) : (
 								<Badge variant="destructive">在庫切れ</Badge>
@@ -250,7 +249,7 @@ export function ProductDetail({
 											size="icon"
 											className="h-8 w-8"
 											onClick={() => adjustQuantity(1)}
-											disabled={quantity >= product.stock_quantity}
+											disabled={quantity >= product.inventory}
 										>
 											<Plus className="h-4 w-4" />
 										</Button>
@@ -261,12 +260,16 @@ export function ProductDetail({
 								<div className="space-y-2">
 									<Button
 										onClick={handleAddToCart}
-										disabled={product.stock_quantity === 0}
+										disabled={product.inventory === 0 || isLoading}
 										className="w-full"
 										size="lg"
 									>
 										<ShoppingCart className="h-4 w-4 mr-2" />
-										{product.stock_quantity === 0 ? "在庫切れ" : "カートに追加"}
+										{product.inventory === 0
+											? "在庫切れ"
+											: isLoading
+												? "追加中..."
+												: "カートに追加"}
 									</Button>
 
 									<div className="grid grid-cols-2 gap-2">

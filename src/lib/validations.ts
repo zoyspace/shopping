@@ -55,9 +55,62 @@ export const updateCartItemSchema = z.object({
 
 // 注文関連
 export const checkoutSchema = z.object({
-    shippingAddress: addressSchema,
-    billingAddress: addressSchema.optional(),
-    paymentMethodId: z.string().optional(),
+    shippingAddressId: z.string().uuid('有効な配送先住所IDを入力してください'),
+    billingAddressId: z.string().uuid('有効な請求先住所IDを入力してください').optional(),
+    notes: z.string().optional(),
+})
+
+export const createOrderSchema = z.object({
+    shippingAddressId: z.string().uuid('有効な配送先住所IDを入力してください'),
+    billingAddressId: z.string().uuid('有効な請求先住所IDを入力してください').optional(),
+    items: z.array(z.object({
+        productId: z.string().uuid('有効な商品IDを入力してください'),
+        quantity: z.number().int().positive('数量は1以上の整数で入力してください'),
+        price: z.number().positive('価格は正の数値で入力してください'),
+    })).min(1, '注文アイテムは1つ以上必要です'),
+})
+
+export const updateOrderStatusSchema = z.object({
+    status: z.enum(['pending', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded']),
+})
+
+// Stripe決済関連
+export const checkoutValidation = z.object({
+    cartItems: z.array(z.object({
+        id: z.string(),
+        product: z.object({
+            id: z.string().uuid(),
+            name: z.string(),
+            description: z.string().optional(),
+            price: z.number().positive(),
+            currency: z.string().default('jpy'),
+            inventory: z.number().int().nonnegative(),
+            categoryId: z.string().optional(),
+            isActive: z.boolean(),
+            images: z.array(z.object({
+                url: z.string(),
+                alt_text: z.string().optional(),
+                is_main: z.boolean().optional(),
+            })).optional(),
+            createdAt: z.string(),
+            updatedAt: z.string(),
+        }),
+        quantity: z.number().int().positive(),
+        addedAt: z.union([
+            z.string().transform((str) => new Date(str)),
+            z.date()
+        ]).optional(),
+    })).min(1, 'カートが空です'),
+    shippingAddress: z.object({
+        id: z.string().uuid(),
+        line1: z.string(),
+        line2: z.string().optional(),
+        city: z.string(),
+        state: z.string(),
+        postalCode: z.string(),
+        country: z.string().default('JP'),
+    }),
+    metadata: z.record(z.string()).optional(),
 })
 
 // 型推論
@@ -69,3 +122,6 @@ export type ProductInput = z.infer<typeof productSchema>
 export type AddToCartInput = z.infer<typeof addToCartSchema>
 export type UpdateCartItemInput = z.infer<typeof updateCartItemSchema>
 export type CheckoutInput = z.infer<typeof checkoutSchema>
+export type CreateOrderInput = z.infer<typeof createOrderSchema>
+export type UpdateOrderStatusInput = z.infer<typeof updateOrderStatusSchema>
+export type CheckoutValidationInput = z.infer<typeof checkoutValidation>

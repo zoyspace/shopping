@@ -90,16 +90,41 @@ src/
 - [x] 商品画像管理 (Supabase Storage)
 - [x] 商品検索・フィルタリング
 
-### セクション5: カート・注文システム
-- [ ] カート機能実装
-- [ ] 注文フロー設計
-- [ ] 在庫管理
+### セクション5: カート・注文システム ✅ 完了
+- [x] カート機能実装 (use-cart.ts)
+- [x] カートアイテムコンポーネント (cart-item-card.tsx)
+- [x] カートサマリーコンポーネント (cart-summary.tsx)
+- [x] カートページ実装 (/cart/page.tsx)
+- [x] ヘッダーにカートアイコン追加
+- [x] 商品詳細・カードページにカートボタン統合
+- [x] 注文フロー設計
+- [x] 在庫管理（inventory functions）
+- [x] 注文管理フック実装 (use-orders.ts)
+- [x] 住所管理フック実装 (use-addresses.ts)
+- [x] チェックアウトページ実装 (/checkout/page.tsx)
+- [x] 注文履歴ページ実装 (/orders/page.tsx)
+- [x] 注文詳細ページ実装 (/orders/[id]/page.tsx)
+- [x] カート状態同期問題修正 (addToCart後の即時反映)
+- [x] カートリロード機能追加 (reloadCart)
+- [x] 在庫管理（inventory functions）
+- [x] 注文管理フック実装 (use-orders.ts)
+- [x] 住所管理フック実装 (use-addresses.ts)
+- [x] チェックアウトページ実装 (/checkout/page.tsx)
+- [x] 注文履歴ページ実装 (/orders/page.tsx)
+- [x] 注文詳細ページ実装 (/orders/[id]/page.tsx)
 
-### セクション6: Stripe決済システム
-- [ ] Stripe Elements実装
-- [ ] 決済セッション作成
-- [ ] Webhook実装
-- [ ] 決済完了処理
+### セクション6: Stripe決済システム 🔄 進行中
+- [x] Stripe Elements実装
+- [x] 決済セッション作成API (/api/stripe/create-checkout-session)
+- [x] Webhook実装 (Next.js API Route → Supabase Edge Function移行中)
+- [x] 決済完了処理 (checkout.session.completed)
+- [x] 決済成功ページ (/checkout/success)
+- [x] セッション情報取得API (/api/stripe/checkout-session)
+- [x] チェックアウトフォームのStripe連携
+- [x] 注文自動作成・在庫減算・カートクリア
+- [x] Supabase Edge Function作成 (/supabase/functions/stripe-webhook/)
+- [ ] Edge Function デプロイ・設定
+- [ ] Stripe Webhook URL更新
 
 ### セクション7: UI/UXデザイン
 - [ ] レスポンシブデザイン
@@ -135,6 +160,8 @@ src/
 - フリー素材画像使用
 - Context7でドキュメント参照
 - 日本語出力、英語思考
+- 俯瞰的な目で開発
+
 
 ## 📈 進捗管理
 各セクション完了時にチェックマークを更新し、次セクションへ進行

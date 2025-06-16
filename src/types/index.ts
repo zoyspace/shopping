@@ -45,7 +45,7 @@ export interface Product {
     price: number
     original_price?: number
     currency: string
-    stock_quantity: number
+    inventory: number // スキーマに合わせて変更
     categoryId?: string
     category?: Category
     images: ProductImage[]

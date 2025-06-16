@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { Product, Category, ProductImage } from '@/types'
 
@@ -25,10 +25,21 @@ interface ProductCategoryRow {
     slug: string
 }
 
-export function useProducts(options: UseProductsOptions = {}) {
+// デフォルトのオプションオブジェクトを外部で定義（毎回新しいインスタンスを作らないため）
+const DEFAULT_OPTIONS: UseProductsOptions = {}
+
+export function useProducts(options: UseProductsOptions = DEFAULT_OPTIONS) {
     const [products, setProducts] = useState<Product[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+
+    // オプションをメモ化して安定化
+    const memoizedOptions = useMemo(() => ({
+        categoryId: options.categoryId,
+        searchQuery: options.searchQuery,
+        sortBy: options.sortBy,
+        limit: options.limit
+    }), [options.categoryId, options.searchQuery, options.sortBy, options.limit])
 
     const fetchProducts = useCallback(async () => {
         try {
@@ -52,17 +63,17 @@ export function useProducts(options: UseProductsOptions = {}) {
                 .eq('is_active', true)
 
             // カテゴリフィルタ
-            if (options.categoryId) {
-                query = query.eq('category_id', options.categoryId)
+            if (memoizedOptions.categoryId) {
+                query = query.eq('category_id', memoizedOptions.categoryId)
             }
 
             // 検索クエリ
-            if (options.searchQuery) {
-                query = query.or(`name.ilike.%${options.searchQuery}%,description.ilike.%${options.searchQuery}%`)
+            if (memoizedOptions.searchQuery) {
+                query = query.or(`name.ilike.%${memoizedOptions.searchQuery}%,description.ilike.%${memoizedOptions.searchQuery}%`)
             }
 
             // ソート
-            switch (options.sortBy) {
+            switch (memoizedOptions.sortBy) {
                 case 'name-asc':
                     query = query.order('name', { ascending: true })
                     break
@@ -80,8 +91,8 @@ export function useProducts(options: UseProductsOptions = {}) {
             }
 
             // 制限
-            if (options.limit) {
-                query = query.limit(options.limit)
+            if (memoizedOptions.limit) {
+                query = query.limit(memoizedOptions.limit)
             }
 
             const { data, error: supabaseError } = await query
@@ -96,9 +107,8 @@ export function useProducts(options: UseProductsOptions = {}) {
                 name: product.name,
                 description: product.description,
                 price: product.price,
-                original_price: product.original_price,
                 currency: product.currency,
-                stock_quantity: product.stock_quantity,
+                inventory: product.inventory,
                 categoryId: product.category_id,
                 category: product.category ? {
                     id: (product.category as ProductCategoryRow).id,
@@ -133,7 +143,7 @@ export function useProducts(options: UseProductsOptions = {}) {
         } finally {
             setLoading(false)
         }
-    }, [options.categoryId, options.searchQuery, options.sortBy, options.limit])
+    }, [memoizedOptions])
 
     useEffect(() => {
         fetchProducts()
@@ -182,9 +192,8 @@ export function useProduct(productId: string) {
                 name: data.name,
                 description: data.description,
                 price: data.price,
-                original_price: data.original_price,
                 currency: data.currency,
-                stock_quantity: data.stock_quantity,
+                inventory: data.inventory, // スキーマに合わせて修正
                 categoryId: data.category_id,
                 category: data.category ? {
                     id: (data.category as ProductCategoryRow).id,
