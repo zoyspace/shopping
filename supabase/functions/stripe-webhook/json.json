@@ -1,0 +1,445 @@
+{
+    "status_code": 200,
+    "body": {
+        "object": "page",
+        "id": "211dd98a-e73b-8176-bfe4-e48629e90e96",
+        "created_time": "2025-06-13T05:35:00.000Z",
+        "last_edited_time": "2025-06-13T06:41:00.000Z",
+        "created_by": {
+            "object": "user",
+            "id": "113d4577-51df-44e6-9741-c5655cfed83b"
+        },
+        "last_edited_by": {
+            "object": "user",
+            "id": "113d4577-51df-44e6-9741-c5655cfed83b"
+        },
+        "cover": null,
+        "icon": null,
+        "parent": {
+            "type": "database_id",
+            "database_id": "d4c7183c-25ae-43b6-804b-aea593d7ada3"
+        },
+        "archived": false,
+        "in_trash": false,
+        "properties": {
+            "ID": {
+                "id": "%3B%7CwY",
+                "type": "unique_id",
+                "unique_id": {
+                    "prefix": null,
+                    "number": 4382
+                }
+            },
+            "googleMap": {
+                "id": "%3D%7Dhn",
+                "type": "rich_text",
+                "rich_text": []
+            },
+            "purchase_time": {
+                "id": "DN%7C%3F",
+                "type": "rich_text",
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": "21:25 ",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": "21:25 ",
+                        "href": null
+                    }
+                ]
+            },
+            "入力メモ": {
+                "id": "Od_O",
+                "type": "rich_text",
+                "rich_text": []
+            },
+            "ジャンル": {
+                "id": "Pm%7BS",
+                "type": "rollup",
+                "rollup": {
+                    "type": "array",
+                    "array": [
+                        {
+                            "type": "formula",
+                            "formula": {
+                                "type": "string",
+                                "string": null
+                            }
+                        }
+                    ],
+                    "function": "show_original"
+                }
+            },
+            "phone_number": {
+                "id": "SJwV",
+                "type": "rich_text",
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": "044-210-1790 ",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": "044-210-1790 ",
+                        "href": null
+                    }
+                ]
+            },
+            "payment_method": {
+                "id": "SoDW",
+                "type": "rich_text",
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": "PayPay ",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": "PayPay ",
+                        "href": null
+                    }
+                ]
+            },
+            "last_edited_time": {
+                "id": "TeFe",
+                "type": "last_edited_time",
+                "last_edited_time": "2025-06-13T06:41:00.000Z"
+            },
+            "表示金額": {
+                "id": "Ulg%7C",
+                "type": "formula",
+                "formula": {
+                    "type": "number",
+                    "number": 722
+                }
+            },
+            "store_name": {
+                "id": "%5BS%60t",
+                "type": "rich_text",
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": "から好し ",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": "から好し ",
+                        "href": null
+                    }
+                ]
+            },
+            "item": {
+                "id": "%5Bsl%5C",
+                "type": "rich_text",
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": "C[ハニー]4コ 合盛り",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": "C[ハニー]4コ 合盛り",
+                        "href": null
+                    }
+                ]
+            },
+            "アイコン": {
+                "id": "%60%60CJ",
+                "type": "rollup",
+                "rollup": {
+                    "type": "array",
+                    "array": [
+                        {
+                            "type": "relation",
+                            "relation": []
+                        }
+                    ],
+                    "function": "show_original"
+                }
+            },
+            "表示日付": {
+                "id": "bGdU",
+                "type": "formula",
+                "formula": {
+                    "type": "string",
+                    "string": "06/13（Fr)"
+                }
+            },
+            "dify_message": {
+                "id": "dDUk",
+                "type": "rich_text",
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": "",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": "",
+                        "href": null
+                    }
+                ]
+            },
+            "入力日付": {
+                "id": "dLHZ",
+                "type": "date",
+                "date": null
+            },
+            "branch_name": {
+                "id": "fOtc",
+                "type": "rich_text",
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": "川崎新川通り ",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": "川崎新川通り ",
+                        "href": null
+                    }
+                ]
+            },
+            "入力税込金額": {
+                "id": "idOO",
+                "type": "number",
+                "number": null
+            },
+            "branch_address": {
+                "id": "k~Si",
+                "type": "rich_text",
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": " ",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": " ",
+                        "href": null
+                    }
+                ]
+            },
+            "upload": {
+                "id": "m%40hZ",
+                "type": "checkbox",
+                "checkbox": false
+            },
+            "店舗": {
+                "id": "mWm%7D",
+                "type": "relation",
+                "relation": [
+                    {
+                        "id": "6f3ebbf8-f887-4012-8699-53b76cd9475d"
+                    }
+                ],
+                "has_more": false
+            },
+            "住所": {
+                "id": "oA%3Bz",
+                "type": "rollup",
+                "rollup": {
+                    "type": "array",
+                    "array": [
+                        {
+                            "type": "url",
+                            "url": "から揚げ専門 から好し 川崎新川通り店 044-210-1790 https://maps.app.goo.gl/LZSYyftMuJ6uX5av9?g_st=ic"
+                        }
+                    ],
+                    "function": "show_original"
+                }
+            },
+            "purchase_date": {
+                "id": "q%3BMW",
+                "type": "rich_text",
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": "2025-06-09 ",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": "2025-06-09 ",
+                        "href": null
+                    }
+                ]
+            },
+            "集計とのリレーション（列）": {
+                "id": "so%3CL",
+                "type": "relation",
+                "relation": [],
+                "has_more": false
+            },
+            "work表示日付": {
+                "id": "vvDj",
+                "type": "formula",
+                "formula": {
+                    "type": "date",
+                    "date": {
+                        "start": "2025-06-13T05:35:00.000+00:00",
+                        "end": null,
+                        "time_zone": null
+                    }
+                }
+            },
+            "total_amount": {
+                "id": "xuz%3D",
+                "type": "number",
+                "number": 722
+            },
+            "from": {
+                "id": "zxH%3C",
+                "type": "select",
+                "select": {
+                    "id": "8197339d-e61f-4c14-aa4c-dc34d32eea8f",
+                    "name": "Dify",
+                    "color": "blue"
+                }
+            },
+            "created_time": {
+                "id": "%7BQmz",
+                "type": "created_time",
+                "created_time": "2025-06-13T05:35:00.000Z"
+            },
+            "receipt_image": {
+                "id": "~%3E%5D%7D",
+                "type": "files",
+                "files": [
+                    {
+                        "name": "photo.jpg",
+                        "type": "file",
+                        "file": {
+                            "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/260e3441-55f9-4612-bfb1-1b75b6625d06/ae24f55b-7c49-4809-90fe-b52e74674e18/photo.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QFFK5GQQ%2F20250613%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250613T064151Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECcaCXVzLXdlc3QtMiJIMEYCIQCFa5ht%2FrD4Uz12ys%2FGV071VbNhOuAIkvoESe5jA3ZyVgIhALEtxG56pnnzrt2%2BVbNREzTlxhG%2Ffe5birMRN8ayk5NaKv8DCBAQABoMNjM3NDIzMTgzODA1Igwt5lnmGB4Z%2FnJs6yUq3AOVw9jnZg5lP0R%2FxMsygSZZk4JXkDkBMX4nDGWDmIY1feXXsgqoJi0Rc8REXm7Ugpw9lDfZf%2F2UzXISyTrQV4SNPEoR%2F5OYpT%2BI%2FFawVIXvNDduvix5Z9o9NbKUlToB5kcsTzt2RM7gS0YqcYDjN0TBPmgOvYrpfXNxTc1LYGoLmsJEVXadJvMgLFAMu%2B4GHXZ6q8oo3jb9Hf3xy%2Frp62CyGymCgl%2Bmyq1uxK8Kant0DUHMIaOJ5vZ5b5L%2FQ944NV1s5zEsaC7XaIIYwMGibiOQkJUkQQTb2dD5BkAS3mP3eDo6knCwJBHmS6SUdCp68BtehCINqfuVjzTbOWAJS7NZZrwGDZ5v3ZK8YoX4KTh7SBUSFVK2irT7yQM9ZqRIik5jUyvFxtodTgXhEzFJD01h67qtTp82E%2FidEe4jWeZD0kGWh%2BncJFbMOdVUuEUMsh8Y46WG%2FDRaFiZuyQxUUBhvKMTSKdN9W3RTwDQHa9hXnxNpF8riy8E6kBuQHmmc%2BcxA6TiJfw7fhVBpS7NgoRa2KKYdRVZ6FPQPxlzV56BSCDOLXFB0yCX6AEayCwSBP70We3e5CfCNUof0KztvSGhg%2F3ZYMTxFm05k9knmYWDS%2BQNalFtWyazeplDiQzDIi6%2FCBjqkAepHRW58R6xPClNurxoX6mFRrBBErx3Q1yh4oGjS7H%2Bi5X9v9IZVOUJwGdtCZwteVI6mNl2MFlc20S9fMeRjtB8xiDcNsJyyBVRSl6g0ZDlcV8MfGGpz4OO%2FQZ0heLmPKLpjeNw8ZzfYssVLRZi4xWHJdFfyeMvk7%2BNpoHP0E%2FPAoV2m3iBY4ZbCeMPGvlj4qO%2FN1KGkAWHUw3hk%2BGOncMwEezMw&X-Amz-Signature=819eed1b5325af396618f335404addcc2fe5c74cef8b25f2e0c16cdcc600f197&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                            "expiry_time": "2025-06-13T07:41:50.939Z"
+                        }
+                    }
+                ]
+            },
+            "購入品": {
+                "id": "title",
+                "type": "title",
+                "title": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": "ハニー4コ合盛り ",
+                            "link": null
+                        },
+                        "annotations": {
+                            "bold": false,
+                            "italic": false,
+                            "strikethrough": false,
+                            "underline": false,
+                            "code": false,
+                            "color": "default"
+                        },
+                        "plain_text": "ハニー4コ合盛り ",
+                        "href": null
+                    }
+                ]
+            }
+        },
+        "url": "https://www.notion.so/4-211dd98ae73b8176bfe4e48629e90e96",
+        "public_url": null,
+        "request_id": "a87d0367-68bc-43dc-b71a-c79873c45a81"
+    },
+    "headers": {
+        "date": "Fri, 13 Jun 2025 06:41:51 GMT",
+        "content-type": "application/json; charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "cf-ray": "94ef9a93af28241b-IAD",
+        "cf-cache-status": "DYNAMIC",
+        "content-encoding": "gzip",
+        "etag": "W/\"1b87-U0QRr09GlCDmDcg6Jb1xkIxn+2M\"",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "Accept-Encoding",
+        "content-security-policy": "default-src 'none'",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-notion-request-id": "a87d0367-68bc-43dc-b71a-c79873c45a81",
+        "x-permitted-cross-domain-policies": "none",
+        "x-xss-protection": "0",
+        "set-cookie": "__cf_bm=gkBVWTaCbozGYMFqX9.y.Sdc9RkxnoPxqw6LqRzQEZk-1749796911-1.0.1.1-Cu1Ds6E7Yvpa9TFHGU0CMk7yjSXIYdoJp3zrb2_Fcv4MVFJWMIRO0uDxDGG1y4YL5JRzwXubF73pqMz7XuTmUcs2ilKtIzM8rNdVM0L8BQY; path=/; expires=Fri, 13-Jun-25 07:11:51 GMT; domain=.notion.com; HttpOnly; Secure; SameSite=None, _cfuvid=7lhGzedEI6c96VgRqYrN.NOeJPmP4MdmWOXBYGWhorU-1749796911160-0.0.1.1-604800000; path=/; domain=.notion.com; HttpOnly; Secure; SameSite=None",
+        "server": "cloudflare",
+        "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "files": []
+}
