@@ -4,7 +4,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckCircle2, ShoppingBag, Receipt } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
 
-export default function CheckoutSuccessPage() {
+function CheckoutSuccessPageContent() {
 	const searchParams = useSearchParams();
 	const sessionId = searchParams.get("session_id");
 	const [isLoading, setIsLoading] = useState(true);
@@ -187,4 +187,20 @@ export default function CheckoutSuccessPage() {
 			</div>
 		</div>
 	);
+}
+
+export default function CheckoutSuccessPage() {
+       return (
+               <Suspense
+                       fallback={
+                               <div className="container mx-auto px-4 py-8">
+                                       <div className="flex justify-center">
+                                               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+                                       </div>
+                               </div>
+                       }
+               >
+                       <CheckoutSuccessPageContent />
+               </Suspense>
+       );
 }
