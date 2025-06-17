@@ -68,7 +68,7 @@ export function ProductCard({
 
 	return (
 		<Card
-			className={`group overflow-hidden hover:shadow-lg transition-shadow duration-300 ${className}`}
+			className={`pt-0 group overflow-hidden hover:shadow-lg transition-shadow duration-300 ${className}`}
 		>
 			<Link href={`/products/${product.id}`}>
 				<CardContent className="p-0">
