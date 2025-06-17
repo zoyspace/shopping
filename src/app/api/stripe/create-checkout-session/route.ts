@@ -4,13 +4,29 @@
 
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { stripe } from '@/lib/stripe/server'
 import { createClient } from '@/lib/supabase/server'
 import { checkoutValidation, type CheckoutValidationInput } from '@/lib/validations'
 
 export async function POST(request: NextRequest) {
     try {
         console.log('🛒 Creating checkout session...');
+
+        // Stripeクライアントの動的インポートとエラーハンドリング
+        let stripe: import('stripe').Stripe;
+        try {
+            const stripeModule = await import('@/lib/stripe/server');
+            stripe = stripeModule.stripe;
+            console.log('✅ Stripe client initialized successfully');
+        } catch (stripeError) {
+            console.error('❌ Stripe initialization failed:', stripeError);
+            return NextResponse.json(
+                {
+                    error: 'Stripe configuration error',
+                    details: stripeError instanceof Error ? stripeError.message : 'Unknown error'
+                },
+                { status: 500 }
+            );
+        }
 
         const supabase = await createClient()
 
