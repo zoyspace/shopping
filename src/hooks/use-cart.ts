@@ -295,7 +295,7 @@ export function useCart() {
             toast.error(errorMessage)
             throw error
         }
-    }, [user, supabase, loadServerCart, loadLocalCart, saveLocalCart, calculateCartTotals])
+    }, [user, supabase, loadServerCart, loadLocalCart, saveLocalCart, calculateCartTotals, cart.items])
 
     // カートアイテムの数量を更新
     const updateQuantity = useCallback(async (productId: string, quantity: number) => {

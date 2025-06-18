@@ -13,7 +13,7 @@ import type { Address } from "@/types";
 
 export function CheckoutForm() {
 	const router = useRouter();
-        const { items, totalPrice, isLoading } = useCart();
+	const { items, totalPrice, isLoading } = useCart();
 	const { addresses, getDefaultAddress, fetchAddresses } = useAddresses();
 
 	const [selectedShippingAddress, setSelectedShippingAddress] =
@@ -106,31 +106,33 @@ export function CheckoutForm() {
 		}
 	};
 
-        if (isLoading) {
-                return (
-                        <Card>
-                                <CardHeader>
-                                        <CardTitle className="text-center">カート情報を読み込み中...</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                        <div className="flex justify-center">
-                                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
-                                        </div>
-                                </CardContent>
-                        </Card>
-                );
-        }
+	if (isLoading) {
+		return (
+			<Card>
+				<CardHeader>
+					<CardTitle className="text-center">
+						カート情報を読み込み中...
+					</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<div className="flex justify-center">
+						<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+					</div>
+				</CardContent>
+			</Card>
+		);
+	}
 
-        if (items.length === 0) {
-                return (
-                        <Card>
-                                <CardContent className="py-8 text-center">
-                                        <p className="text-muted-foreground mb-4">カートが空です</p>
-                                        <Button onClick={() => router.push("/products")}>商品を見る</Button>
-                                </CardContent>
-                        </Card>
-                );
-        }
+	if (items.length === 0) {
+		return (
+			<Card>
+				<CardContent className="py-8 text-center">
+					<p className="text-muted-foreground mb-4">カートが空です</p>
+					<Button onClick={() => router.push("/products")}>商品を見る</Button>
+				</CardContent>
+			</Card>
+		);
+	}
 
 	// 住所が存在しない場合
 	if (addresses.length === 0) {
