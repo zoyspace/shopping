@@ -88,25 +88,25 @@ export function useCart() {
             const { data, error } = await supabase
                 .from('cart_items')
                 .select(`
-          id,
-          quantity,
-          created_at,
-          product:products (
-            id,
-            name,
-            description,
-            price,
-            currency,
-            inventory,
-            category_id,
-            is_active,
-            product_images (
-              url,
-              alt_text,
-              is_main
-            )
-          )
-        `)
+                      id,
+                      quantity,
+                      created_at,
+                      product:products (
+                        id,
+                        name,
+                        description,
+                        price,
+                        currency,
+                        inventory,
+                        category_id,
+                        is_active,
+                        product_images (
+                          url,
+                          alt_text,
+                          is_main
+                        )
+                      )
+                    `)
                 .eq('user_id', user.id)
                 .order('created_at', { ascending: false })
 
@@ -119,7 +119,7 @@ export function useCart() {
 
             const result = data?.map(item => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const productData = item.product as any
+                const productData = item.product as Product
                 return {
                     id: item.id,
                     product: {
