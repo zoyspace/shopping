@@ -27,9 +27,18 @@ export function CheckoutOrderSummary({
 				{/* 商品一覧 */}
 				<div className="space-y-3">
 					{items.map((item) => {
-						const mainImage = item.product.images?.find((img) => img.isMain);
-						const imageUrl =
-							mainImage?.url || item.product.image_url || "/placeholder.jpg";
+						// 画像データの取得ロジックを修正
+						const images = item.product.images || [];
+						const mainImage = images.find((img) => img.isMain) || images[0];
+						const imageUrl = mainImage?.url || "/placeholder.jpg";
+
+						console.log("🖼️ Image debug:", {
+							productId: item.product.id,
+							productName: item.product.name,
+							imagesCount: images.length,
+							mainImage: mainImage,
+							imageUrl: imageUrl,
+						});
 
 						return (
 							<div key={item.id} className="flex items-center space-x-3">
@@ -38,6 +47,10 @@ export function CheckoutOrderSummary({
 										src={imageUrl}
 										alt={mainImage?.altText || item.product.name}
 										className="h-12 w-12 rounded-md object-cover"
+										onError={(e) => {
+											console.error("🖼️ Image load error:", imageUrl);
+											(e.target as HTMLImageElement).src = "/placeholder.jpg";
+										}}
 									/>
 									<div className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-primary text-xs text-primary-foreground flex items-center justify-center">
 										{item.quantity}

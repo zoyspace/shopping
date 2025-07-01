@@ -118,8 +118,40 @@ export function useCart() {
             console.log('🛒 Raw server cart data:', data);
 
             const result = data?.map(item => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const productData = item.product as Product
+                // Supabaseから取得したproductデータの型変換
+                const productData = item.product as unknown as {
+                    id: string;
+                    name: string;
+                    description?: string;
+                    price: number;
+                    currency: string;
+                    inventory: number;
+                    category_id?: string;
+                    is_active: boolean;
+                    product_images?: Array<{
+                        url: string;
+                        alt_text?: string;
+                        is_main?: boolean;
+                    }>;
+                }
+
+                // 画像データの正しい変換
+                const productImages = (productData.product_images || []).map((img) => ({
+                    id: `img-${Date.now()}-${Math.random()}`,
+                    productId: productData.id,
+                    url: img.url,
+                    altText: img.alt_text,
+                    isMain: img.is_main || false,
+                    sortOrder: 0,
+                    createdAt: new Date().toISOString()
+                }));
+
+                console.log('🖼️ Product images processed:', {
+                    productId: productData.id,
+                    rawImages: productData.product_images,
+                    processedImages: productImages
+                });
+
                 return {
                     id: item.id,
                     product: {
@@ -131,7 +163,7 @@ export function useCart() {
                         inventory: productData.inventory,
                         categoryId: productData.category_id,
                         isActive: productData.is_active,
-                        images: productData.product_images || [],
+                        images: productImages,
                         createdAt: new Date().toISOString(),
                         updatedAt: new Date().toISOString(),
                     } as Product,
