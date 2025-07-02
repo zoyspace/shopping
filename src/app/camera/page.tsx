@@ -7,12 +7,12 @@ export default function CameraPage() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [photo, setPhoto] = useState<string | null>(null);
 
-  // カメラ起動
+  // カメラ起動（背面カメラ）
   useEffect(() => {
     const startCamera = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "user" }, // "environment" で背面カメラ
+          video: { facingMode: "environment" }, // ← ここが背面カメラ指定
           audio: false,
         });
         if (videoRef.current) {
@@ -39,14 +39,13 @@ export default function CameraPage() {
     canvas.height = video.videoHeight;
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    // Base64形式の画像を保存
     const imageData = canvas.toDataURL("image/png");
     setPhoto(imageData);
   };
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-4 space-y-4">
-      <h1 className="text-xl font-bold">📸 写真を撮る</h1>
+      <h1 className="text-xl font-bold">📸 背面カメラで写真を撮る</h1>
 
       <video
         ref={videoRef}
