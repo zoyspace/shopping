@@ -165,9 +165,6 @@ export async function POST(request: NextRequest) {
                 shipping_address_id: shippingAddress.id,
                 ...metadata,
             },
-            shipping_address_collection: {
-                allowed_countries: ['JP'],
-            },
             billing_address_collection: 'required',
             allow_promotion_codes: true,
             expires_at: Math.floor(Date.now() / 1000) + (30 * 60), // 30分後に期限切れ
